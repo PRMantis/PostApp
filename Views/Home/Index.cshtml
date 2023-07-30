@@ -1,0 +1,73 @@
+﻿@model KlientaiViewModel
+@{
+    ViewData["Title"] = "Klientu Duomenys";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Turimi klientai</h1>
+    <div class="">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">
+                        @Html.DisplayName("Name")
+                    </th>
+                    <th scope="col">
+                        @Html.DisplayName("Address")
+                    </th>
+                    <th scope="col">
+                        @Html.DisplayName("PostCode")
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var klientas in Model.Klientai)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(item => klientas.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(item => klientas.Address)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(item => klientas.PostCode)
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <div class="container text-center">
+        <div class="row">
+            <div class="col-3">
+                <form method="post">
+                    <button asp-controller="Home" asp-action="ReadDataFromFile">Read from JSON File</button>
+                </form>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <form method="post">
+                    <div class="row">
+                        <div class="col-3">
+                            <label asp-for="ApiKey"></label>
+                        </div>
+                        <div class="col-3">
+                            <textarea asp-for="ApiKey" required></textarea>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-3">
+                            <button asp-controller="Home" asp-action="MakeApiCallByAddress">Update Address</button>
+                        </div>
+                        <div class="col-3">
+                            <select asp-for="SelectedAddress" asp-items="Model.Addresses" required></select>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
